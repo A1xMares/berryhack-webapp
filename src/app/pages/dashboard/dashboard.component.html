@@ -1,0 +1,94 @@
+<!----------------------->
+<!-- page container -->
+<div class="container-fluid fullHeight">
+
+  <!----------------------->
+  <!-- layout container -->
+  <div class="row">
+
+    <div class="col-12 col-md-8">
+      <mat-card class="mb-3 pb-2 blueDataContainer">
+        <div class="dataContainer titleContainer">
+          <img src="../../../assets/img/control-panel.svg" class="panelImg" style="margin-left: 10px">
+          <h2 class="whiteColor" style="font-size: 25px; cursor: pointer" [matMenuTriggerFor]="tuneles"> Macro túnel {{currentTunel}}</h2>
+          <mat-icon style="color:white!important;cursor: pointer" [matMenuTriggerFor]="tuneles">keyboard_arrow_down</mat-icon>
+          <!----------------------->
+          <!-- popoup menu (modal) -->
+          <mat-menu #tuneles="matMenu">
+            <button mat-menu-item class="popUpMenuButton popUpMenuText" (click)="currentTunel = 1">
+              <mat-icon class="popUpMenuIcon">blur_circular</mat-icon>
+              <span>Macro túnel 1</span>
+            </button>
+            <button mat-menu-item class="popUpMenuButton popUpMenuText" (click)="currentTunel = 2">
+              <mat-icon class="popUpMenuIcon">blur_circular</mat-icon>
+              <span>Macro túnel 2</span>
+            </button>
+            <button mat-menu-item class="popUpMenuButton popUpMenuText" (click)="currentTunel = 3">
+              <mat-icon class="popUpMenuIcon">blur_circular</mat-icon>
+              <span>Macro túnel 3</span>
+            </button>
+          </mat-menu>
+        </div>
+        <div class="dataContainer topDataContainer">
+          <div class="secondDataContainer">
+            <img src="../../../assets/img/status.svg" class="dataIcon" alt="">
+            <div class="textTopContainer">
+              <h3 class="whiteColor resizableSubtitle">Estatus de sistema</h3>
+              <p style="color: lightgray;margin-bottom: 40px;margin-top: 10px;text-align: center;">CORRECTO</p>
+            </div>
+          </div>
+          <div class="secondDataContainer">
+            <img src="../../../assets/img/tint.svg" class="dataIcon" alt="">
+            <div class="textTopContainer ">
+              <h3 class="whiteColor resizableSubtitle">Estatus de entintado</h3>
+              <p style="color: lightgray;margin-bottom: 40px;margin-top: 10px;text-align: center;">MEDIO</p>
+            </div>
+          </div>
+          <div class="secondDataContainer">
+            <img src="../../../assets/img/time.svg" class="dataIcon" alt="">
+            <div class="textTopContainer ">
+              <h3 class="whiteColor resizableSubtitle">Última act.</h3>
+              <p style="color: lightgray;margin-bottom: 40px;margin-top: 10px;text-align: center;">{{lastUpdate}}</p>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-4" >
+      <mat-card class="centerCard gaugeCard" style="margin: 10px 0 ;">
+        <h2>Temperatura actual</h2>
+        <iframe width="400" height="280" class="gauge chart" src="https://thingspeak.com/channels/895281/widgets/113153?width=200&height=150"></iframe>
+
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <mat-card class="mb-2 pb-2 centerCard">
+        <h2 class="orangeText mb-3">Luminosidad</h2>
+        <iframe width="350" height="175" class="chart" src="https://thingspeak.com/channels/895281/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=10&width=350&height=200"></iframe>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <mat-card class="mb-2 pb-2 centerCard">
+        <h2 class="orangeText mb-3">Temperatura</h2>
+        <iframe width="350" height="175" class="chart" src="https://thingspeak.com/channels/895281/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=10&width=350&height=200"></iframe>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <mat-card class="mb-2 pb-2 centerCard">
+        <h2 class="orangeText mb-3">Húmedad</h2>
+        <iframe width="350" height="175" class="chart" src="https://thingspeak.com/channels/895281/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=10&width=350&height=200"></iframe>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <mat-card class="mb-2 pb-2 centerCard">
+        <h2 class="orangeText mb-3">Presión</h2>
+        <iframe width="350" height="175" class="chart" src="https://thingspeak.com/channels/895281/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=10&width=350&height=200"></iframe>
+      </mat-card>
+    </div>
+  </div>
+</div>

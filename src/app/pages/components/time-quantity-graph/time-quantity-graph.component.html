@@ -1,0 +1,36 @@
+
+<!----------------------->
+<!-- loading spinner -->
+<div class="dashLoaderContainer" *ngIf="loading">
+  <mat-progress-bar mode="buffer" class="loadProgress"></mat-progress-bar>
+</div>
+
+<!----------------------->
+<!-- chart container -->
+<div class="fadeIn">
+  <div class="row graphContainer">
+
+    <!----------------------->
+    <!-- graph container -->
+    <div class="col-12" id="chartContainer" #chartContainer>
+      <ngx-charts-line-chart
+              [scheme]="colorScheme"
+              [results]="chartData"
+              [animations]="true"
+              [curve]="curveFunction"
+              [gradient]="true"
+              [xAxis]="true"
+              [yAxis]="true"
+              [legend]="true"
+              [legendTitle]="''"
+              [legendPosition]="isBigSize ? 'right' : 'above'"
+              [showXAxisLabel]="false"
+              [showYAxisLabel]="false"
+              [autoScale]="true"
+              [timeline]="false">
+      </ngx-charts-line-chart>
+    </div>
+
+  </div>
+</div>
+

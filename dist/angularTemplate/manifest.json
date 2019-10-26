@@ -1,0 +1,13 @@
+{
+  "gcm_sender_id": "482941778795",
+  "gcm_sender_id_comment": "Do not change the GCM Sender ID",
+  "name": "Adroit",
+  "short_name": "Adroit",
+  "icons": [
+
+  ],
+  "display": "standalone",
+  "start_url": "/#/dashboard",
+  "background_color": "#FFFFFF",
+  "theme_color": "#D71440"  
+}

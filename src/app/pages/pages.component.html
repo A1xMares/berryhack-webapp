@@ -1,0 +1,141 @@
+<div id="main-wrapper">
+  <!----------------------->
+  <!-- toolbar -->
+  <div id="whiteToolbar" [formGroup]="menuForm">
+    <div id="toolbarContainer">
+      <div class="logoToggleContainer">
+        <!----------------------->
+        <!-- logo -->
+        <div id="adroitLogo">
+          <img src="../../assets/img/logo.png" alt="adroit logo" class="adroitImg">
+        </div>
+        <!----------------------->
+        <!-- toggle button if !isBigSize -->
+        <button mat-icon-button *ngIf="!isBigSize" (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      </div>
+
+      <!----------------------->
+      <!-- toolbar if isBigSize -->
+      <div id="flexWrapper" *ngIf="isBigSize">
+        <div id="toolbarWrapper">
+          <div id="pagesMenuWrapper">
+            <!----------------------->
+            <!-- dashboard menu -->
+            <div class="menuItem pointer hoverItem" matRipple routerLink="/dashboard" routerLinkActive="active">
+              <mat-icon class="menuItemIcon">dashboard</mat-icon>
+              <p class="inlineBlock Panel-act-2 menuItemText">Dashboard</p>
+            </div>
+            <!----------------------->
+            <!-- clients menu -->
+            <div class="menuItem pointer hoverItem" matRipple routerLink="/otro" routerLinkActive="active">
+              <mat-icon class="menuItemIcon">account_box</mat-icon>
+              <p class="inlineBlock Panel-act-2 menuItemText">Cultivos</p>
+            </div>
+            <!----------------------->
+            <!-- deals menu -->
+            <div class="menuItem pointer hoverItem" matRipple routerLink="/otro" routerLinkActive="active">
+              <mat-icon class="menuItemIcon">widgets</mat-icon>
+              <p class="inlineBlock Panel-act-2 menuItemText">Tuneles</p>
+            </div>
+
+          </div>
+          <div id="iconsMenuWrapper">
+            <!----------------------->
+            <!-- notes menu -->
+            <div class="iconMenuItem hoverItem pointer" matRipple routerLink="/otro" routerLinkActive="active" matTooltip="Notas">
+              <mat-icon class="lastMenuItemIcon">book</mat-icon>
+            </div>
+            <div class="iconMenuItem hoverItem pointer" matRipple routerLink="/otro" routerLinkActive="active" matTooltip="Recordatorios">
+              <mat-icon class="lastMenuItemIcon">alarm</mat-icon>
+            </div>
+            <!----------------------->
+            <!-- calendar menu -->
+            <div class="iconMenuItem hoverItem pointer" matRipple routerLink="/otro" routerLinkActive="active" matTooltip="Calendario">
+              <mat-icon class="lastMenuItemIcon">date_range</mat-icon>
+            </div>
+            <!----------------------->
+            <!-- notification menu -->
+            <div class="iconMenuItem hoverItem pointer" matRipple routerLink="/otro" routerLinkActive="active" matTooltip="Notificaciones">
+              <mat-icon class="lastMenuItemIcon">notifications</mat-icon>
+            </div>
+            <!----------------------->
+            <!-- profile menu -->
+            <div class="menuItem pointer hoverItem nameItem" id="menuDiv10" [matMenuTriggerFor]="userMenu">
+              <mat-icon class="firstMenuItemIcon">person</mat-icon>
+              <p class="name-style inlineBlock Panel-act-2 menuItemText cut-text userName">José Pérez</p>
+              <!----------------------->
+              <!-- popoup menu (modal) -->
+              <mat-menu #userMenu="matMenu">
+                <button mat-menu-item class="popUpMenuButton popUpMenuText" routerLink="/otro">
+                  <mat-icon class="popUpMenuIcon">person</mat-icon>
+                  <span>Perfil</span>
+                </button>
+                <button mat-menu-item class="popUpMenuButton popUpMenuText" routerLink="/otro">
+                  <mat-icon class="popUpMenuIcon">build</mat-icon>
+                  <span>Configuración</span>
+                </button>
+                <button mat-menu-item class="popUpMenuButton popUpMenuText" (click)="logout()">
+                  <mat-icon class="popUpMenuIcon">exit_to_app</mat-icon>
+                  <span>Cerrar sesión</span>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-sidenav-container class="sidenavContainer">
+    <mat-sidenav #snav mode="over" class="sideNavMenu">
+      <!----------------------->
+      <!-- profile menu -->
+      <div class="responsiveUserContainer">
+        <!----------------------->
+        <!-- profile menu -->
+        <div class="sidenavMenuItem" matRipple [matMenuTriggerFor]="userMenu2">
+          <mat-icon class="firstMenuItemIcon">person</mat-icon>
+          <p class="name-style inlineBlock Panel-act-2 menuItemText cut-text userName">José Pérez</p>
+          <!----------------------->
+          <!-- popoup menu (modal) -->
+          <mat-menu #userMenu2="matMenu">
+            <button mat-menu-item class="popUpMenuButton popUpMenuText" routerLink="/otro" (click)="snav.toggle()">
+              <mat-icon class="popUpMenuIcon">person</mat-icon>
+              <span>Profile</span>
+            </button>
+            <button mat-menu-item class="popUpMenuButton popUpMenuText" routerLink="/otro" (click)="snav.toggle()">
+              <mat-icon class="popUpMenuIcon">build</mat-icon>
+              <span>Settings</span>
+            </button>
+            <button mat-menu-item class="popUpMenuButton popUpMenuText" (click)="snav.toggle();logout()">
+              <mat-icon class="popUpMenuIcon">exit_to_app</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+      <!----------------------->
+      <!-- reminders menu -->
+      <div class="sidenavMenuItem" matRipple routerLink="/otro" routerLinkActive="active" (click)="snav.toggle()">
+        <mat-icon class="menuItemIcon">alarm</mat-icon>
+        <p class="inlineBlock Panel-act-2 menuItemText">Recordatorios</p>
+      </div>
+      <!----------------------->
+      <!-- notes menu -->
+      <div class="sidenavMenuItem" matRipple routerLink="/otro" routerLinkActive="active" (click)="snav.toggle()">
+        <mat-icon class="menuItemIcon">book</mat-icon>
+        <p class="inlineBlock Panel-act-2 menuItemText">Notas</p>
+      </div>
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <!----------------------->
+      <!-- children pages wrapper -->
+      <div id="pagesWrapper">
+        <div id="pagesPadding">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
