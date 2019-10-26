@@ -17,6 +17,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HotTableModule } from '@handsontable/angular';
 import { TimeQuantityGraphComponent } from './components/time-quantity-graph/time-quantity-graph.component';
 
+import { ChartsModule } from 'ng2-charts';
+
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
@@ -25,6 +27,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
         TimeQuantityGraphComponent
     ],
     imports: [
+        ChartsModule,
         CommonModule,
         MaterialModule,
         FormsModule,

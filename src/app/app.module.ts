@@ -12,6 +12,7 @@ import 'hammerjs';
 import { QuillModule } from 'ngx-quill'
 import {CommonModule} from "@angular/common";
 import {IConfig, NgxMaskModule} from "ngx-mask";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -38,7 +39,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
   bootstrap: [AppComponent],
   entryComponents: [
     LoaderComponent
-  ]
+  ],
+  providers: []
 })
 export class AppModule {
   public constructor() {

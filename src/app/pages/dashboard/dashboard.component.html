@@ -4,9 +4,9 @@
 
   <!----------------------->
   <!-- layout container -->
-  <div class="row">
+  <div class="row dashContainer">
 
-    <div class="col-12 col-md-8">
+    <div class="col-12">
       <mat-card class="mb-3 pb-2 blueDataContainer">
         <div class="dataContainer titleContainer">
           <img src="../../../assets/img/control-panel.svg" class="panelImg" style="margin-left: 10px">
@@ -55,39 +55,189 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-4" >
-      <mat-card class="centerCard gaugeCard" style="margin: 10px 0 ;">
-        <h2>Temperatura actual</h2>
-        <iframe width="400" height="280" class="gauge chart" src="https://thingspeak.com/channels/895281/widgets/113153?width=200&height=150"></iframe>
+    <div class="col-12 col-md-4 col-lg-6">
+      <mat-card class="centerCard" style="margin: 10px 0;">
+        <h2 class="cardDataTitle" style="margin-bottom: 15px;">Temperatura actual</h2>
+        <iframe width="450" height="305" class="gauge chart" src="https://thingspeak.com/channels/895281/widgets/113153?width=auto&height=175"></iframe>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-8 col-lg-6">
+      <mat-card class="centerCard" style="margin: 10px 0 ;">
+        <h2 class="cardDataTitle">Gráfica de variación de datos</h2>
+        <div class="row" style="width: 100%;">
+          <div class="col-6 col-md-3" style="font-size: 12px;text-align: center;">
+            <p>Luminosidad: 1 a 1,000</p>
+          </div>
+          <div class="col-6 col-md-3" style="font-size: 12px;text-align: center;">
+            <p>Temperatura.: 1 a 1</p>
+          </div>
+          <div class="col-6 col-md-3" style="font-size: 12px;text-align: center;">
+            <p>Húmedad.: 1 a 1</p>
+          </div>
+          <div class="col-6 col-md-3" style="font-size: 12px;text-align: center;">
+            <p>Presión.: 1 a 1</p>
+          </div>
+        </div>
+        <div style="width:300px; height: 300px;">
+          <canvas baseChart
+                  [datasets]="radarChartData"
+                  [options]="radarChartOptions"
+                  [labels]="radarChartLabels"
+                  [chartType]="radarChartType"
+                  height="150" width="150" #radarChart>
+          </canvas>
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="col-12">
+      <mat-card class="mb-2 pb-2 centerCard">
+        <h2 class="cardDataTitle mb-0">Luminosidad</h2>
+        <div class="row rowDataContainer">
+
+          <div class="col-12 col-md-6">
+            <h3 class="orangeText mb-0">Datos en tiempo real</h3>
+            <iframe width="100%" height="200" class="chart" src="https://thingspeak.com/channels/895281/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=10&width=auto&height=200"></iframe>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="row" style="height: 100%;">
+              <div class="col-4">
+                <mat-card class="centerCard" style="height: calc(100% - 20px);">
+                  <h4 style="text-align: center;">Valor actual</h4>
+                  <p style="text-align: center;font-size: 25px;margin-bottom: 25px;">{{(this.currentValues.luminocity/1000).toLocaleString()}} Lux</p>
+                </mat-card>
+              </div>
+              <div class="col-4">
+                <mat-card class="centerCard" style="height: calc(100% - 20px);">
+                  <h4 style="text-align: center;">Valor idóneo</h4>
+                  <p style="text-align: center;font-size: 25px;margin-bottom: 25px;">{{(this.idealValues.luminocity/1000).toLocaleString()}} Lux</p>
+                </mat-card>
+              </div>
+              <div class="col-4">
+                <mat-card class="centerCard" style="height: calc(100% - 20px);">
+                  <h4 style="text-align: center;">Factor de variación</h4>
+                  <p style="text-align: center;font-size: 25px;margin-bottom: 25px;">{{(((this.idealValues.luminocity - this.currentValues.luminocity) / this.currentValues.luminocity) * 100).toFixed(2)}} %</p>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="col-12">
+      <mat-card class="mb-2 pb-2 centerCard">
+        <h2 class="cardDataTitle mb-0">Temperatura</h2>
+
+        <div class="row rowDataContainer">
+
+          <div class="col-12 col-md-6">
+            <h3 class="orangeText mb-0">Datos en tiempo real</h3>
+            <iframe width="100%" height="200" class="chart" src="https://thingspeak.com/channels/895281/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=10&width=auto&height=200"></iframe>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="row" style="height: 100%;">
+              <div class="col-4">
+                <mat-card class="centerCard" style="height: calc(100% - 20px);">
+                  <h4 style="text-align: center;">Valor actual</h4>
+                  <p style="text-align: center;font-size: 25px;margin-bottom: 25px;">{{(this.currentValues.temperature/1000).toLocaleString()}} C.</p>
+                </mat-card>
+              </div>
+              <div class="col-4">
+                <mat-card class="centerCard" style="height: calc(100% - 20px);">
+                  <h4 style="text-align: center;">Valor idóneo</h4>
+                  <p style="text-align: center;font-size: 25px;margin-bottom: 25px;">{{(this.idealValues.temperature/1000).toLocaleString()}} C.</p>
+                </mat-card>
+              </div>
+              <div class="col-4">
+                <mat-card class="centerCard" style="height: calc(100% - 20px);">
+                  <h4 style="text-align: center;">Factor de variación</h4>
+                  <p style="text-align: center;font-size: 25px;margin-bottom: 25px;">{{(((this.idealValues.temperature - this.currentValues.temperature) / this.currentValues.temperature) * 100).toFixed(2)}} %</p>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="col-12">
+      <mat-card class="mb-2 pb-2 centerCard">
+        <h2 class="cardDataTitle mb-0">Húmedad</h2>
+
+        <div class="row rowDataContainer">
+
+          <div class="col-12 col-md-6">
+            <h3 class="orangeText mb-0">Datos en tiempo real</h3>
+            <iframe width="100%" height="200" class="chart" src="https://thingspeak.com/channels/895281/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=10&width=auto&height=200"></iframe>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="row" style="height: 100%;">
+              <div class="col-4">
+                <mat-card class="centerCard" style="height: calc(100% - 20px);">
+                  <h4 style="text-align: center;">Valor actual</h4>
+                  <p style="text-align: center;font-size: 25px;margin-bottom: 25px;">{{this.currentValues.humidity.toLocaleString()}} %</p>
+                </mat-card>
+              </div>
+              <div class="col-4">
+                <mat-card class="centerCard" style="height: calc(100% - 20px);">
+                  <h4 style="text-align: center;">Valor idóneo</h4>
+                  <p style="text-align: center;font-size: 25px;margin-bottom: 25px;">{{this.idealValues.humidity.toLocaleString()}} %</p>
+                </mat-card>
+              </div>
+              <div class="col-4">
+                <mat-card class="centerCard" style="height: calc(100% - 20px);">
+                  <h4 style="text-align: center;">Factor de variación</h4>
+                  <p style="text-align: center;font-size: 25px;margin-bottom: 25px;">{{(((this.idealValues.humidity - this.currentValues.humidity) / this.currentValues.humidity) * 100).toFixed(2)}} %</p>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+
+        </div>
 
       </mat-card>
     </div>
 
-    <div class="col-12 col-lg-6">
+    <div class="col-12">
       <mat-card class="mb-2 pb-2 centerCard">
-        <h2 class="orangeText mb-3">Luminosidad</h2>
-        <iframe width="350" height="175" class="chart" src="https://thingspeak.com/channels/895281/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=10&width=350&height=200"></iframe>
-      </mat-card>
-    </div>
+        <h2 class="cardDataTitle mb-0">Presión</h2>
 
-    <div class="col-12 col-lg-6">
-      <mat-card class="mb-2 pb-2 centerCard">
-        <h2 class="orangeText mb-3">Temperatura</h2>
-        <iframe width="350" height="175" class="chart" src="https://thingspeak.com/channels/895281/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=10&width=350&height=200"></iframe>
-      </mat-card>
-    </div>
+        <div class="row rowDataContainer">
 
-    <div class="col-12 col-lg-6">
-      <mat-card class="mb-2 pb-2 centerCard">
-        <h2 class="orangeText mb-3">Húmedad</h2>
-        <iframe width="350" height="175" class="chart" src="https://thingspeak.com/channels/895281/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=10&width=350&height=200"></iframe>
-      </mat-card>
-    </div>
+          <div class="col-12 col-md-6">
+            <h3 class="orangeText mb-0">Datos en tiempo real</h3>
+            <iframe width="100%" height="200" class="chart" src="https://thingspeak.com/channels/895281/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=10&width=auto&height=200"></iframe>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="row" style="height: 100%;">
+              <div class="col-4">
+                <mat-card class="centerCard" style="height: calc(100% - 20px);">
+                  <h4 style="text-align: center;">Valor actual</h4>
+                  <p style="text-align: center;font-size: 25px;margin-bottom: 25px;">{{(this.currentValues.pressure/1000).toLocaleString()}} Pa</p>
+                </mat-card>
+              </div>
+              <div class="col-4">
+                <mat-card class="centerCard" style="height: calc(100% - 20px);">
+                  <h4 style="text-align: center;">Valor idóneo</h4>
+                  <p style="text-align: center;font-size: 25px;margin-bottom: 25px;">{{(this.idealValues.pressure/1000).toLocaleString()}} Pa</p>
+                </mat-card>
+              </div>
+              <div class="col-4">
+                <mat-card class="centerCard" style="height: calc(100% - 20px);">
+                  <h4 style="text-align: center;">Factor de variación</h4>
+                  <p style="text-align: center;font-size: 25px;margin-bottom: 25px;">{{(((this.idealValues.pressure - this.currentValues.pressure) / this.currentValues.pressure) * 100).toFixed(2)}} %</p>
+                </mat-card>
+              </div>
+            </div>
+          </div>
 
-    <div class="col-12 col-lg-6">
-      <mat-card class="mb-2 pb-2 centerCard">
-        <h2 class="orangeText mb-3">Presión</h2>
-        <iframe width="350" height="175" class="chart" src="https://thingspeak.com/channels/895281/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=10&width=350&height=200"></iframe>
+        </div>
+
+
       </mat-card>
     </div>
   </div>

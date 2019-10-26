@@ -136,7 +136,7 @@ export class TimeQuantityGraphComponent implements OnInit, AfterViewInit, OnDest
       tempData[3].series.push({name: values.created_at, value: parseInt(values.field4)});
     });
     this.chartData = tempData;
-    console.log(this.chartData);
+    console.log(this.chartData)
   }
 
   // ================================ DESTROY COMPONENT HOOK MANAGEMENT ================================ //
